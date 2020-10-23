@@ -2,7 +2,7 @@
 oneflux.pipeline.common
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Pipeline common/shared configuration parameters
 
@@ -29,7 +29,8 @@ from oneflux import ONEFluxError
 from oneflux.utils.strings import is_int
 from oneflux.pipeline.variables_codes import VARIABLE_LIST_MUST_BE_PRESENT, VARIABLE_LIST_SHOULD_BE_PRESENT, VARIABLE_LIST_COULD_BE_PRESENT
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 HOSTNAME = socket.gethostname()
 
@@ -155,7 +156,7 @@ class ONEFluxPipelineError(ONEFluxError):
 def run_command(cmd):
     """
     Runs command and tests return value, raises exception if failed
-    
+
     :param cmd: command to be executed
     :type cmd: str
     """
@@ -179,7 +180,7 @@ def run_command(cmd):
 def test_dir(tdir, label, log_only=False):
     """
     Tests if directory exists, if not logs error and raises exception
-    
+
     :param tdir: path to directory to be tested
     :type tdir: str
     :param label: label for type of directory being tested
@@ -199,7 +200,7 @@ def test_dir(tdir, label, log_only=False):
 def test_file(tfile, label, log_only=False):
     """
     Tests if file exists, if not logs error and raises exception
-    
+
     :param tfile: file name to be tested
     :type tfile: str
     :param label: label for type of file being tested
@@ -220,7 +221,7 @@ def test_file_not_empty(tfile, label, log_only=False):
     """
     Tests if file exists and is not empty,
     if not logs error and raises exception
-    
+
     :param tfile: file name to be tested
     :type tfile: str
     :param label: label for type of file being tested
@@ -295,7 +296,7 @@ def test_file_list(file_list, tdir, label, log_only=False):
     Tests files in file list:
     if * or ? in filename, tests pattern in directory
     else tests filename
-    
+
     :param file_list: list of base filenames/patterns to be tested
     :type file_list: list
     :param tdir: directory where to look for files/patterns
@@ -316,7 +317,7 @@ def test_file_list(file_list, tdir, label, log_only=False):
 def test_file_list_or(file_list, tdir, label, log_only=False):
     """
     Tests files in file list (if any, returns True), tests filenames only
-    
+
     :param file_list: list of base filenames to be tested
     :type file_list: list
     :param tdir: directory where to look for files
@@ -452,7 +453,7 @@ def get_headers(filename):
     Parse headers from FPFileV2 format and returns list
     of string with header labels.
     Must have at least two columns.
-    
+
     :param filename: name of the FPFileV2 to be loaded
     :type filename: str
     :rtype: list
@@ -471,7 +472,7 @@ def check_headers_fluxnet2015(filename):
     in FULLSET output of FLUXNET2015 Data product.
     Returns True if all present (or only missing from COULD list),
     False if any variable in MUST or SHOULD be present lists are missing
-    
+
     :param filename: FULLSET filename to be checked
     :type filename: str
     :rtype: bool
@@ -503,7 +504,7 @@ def get_empty_array_year(year=datetime.now().year, start_end=True, variable_list
     Allocates and returns new empty record array for given year using list of dtypes
     (or variable labels as 8byte floats if no dtype list provided) for variables plus
     TIMESTAMP_START and TIMESTAMP_END at beginning
-    
+
     :param year: year to be represented in array (current year if not provided)
     :type year: int
     :param start_end: if True, uses TIMESTAMP_START and TIMESTAMP_END, if not, uses only TIMESTAMP (end)

@@ -2,7 +2,7 @@
 oneflux.pipeline.site_data_product
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Generation of data products in final format from standard internal processing format
 
@@ -38,7 +38,8 @@ from oneflux.pipeline.common import QCDIR, METEODIR, NEEDIR, ENERGYDIR, UNCDIR, 
                                      TIMESTAMP_PRECISION_BY_RESOLUTION
 from oneflux.pipeline.common import ERA_FIRST_TIMESTAMP_START, ERA_LAST_TIMESTAMP_START
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 
 def add_year_records(data, res, year):
@@ -140,7 +141,7 @@ def add_year_records(data, res, year):
 def save_csv_txt(filename, data, delimiter=',', newline='\n', header=None):
     """
     Save procedure for properly handling missing values (from fpp.formats.common.py)
-    
+
     :param filename: name of file to be written (overwrites if exists)
     :type filename: str
     :param data: data array
@@ -412,7 +413,7 @@ def merge_qcdata(qcdata, output):
 def merge_qcdata_res(qcdata, output, res):
     """
     Merges QC Data at resolutions other than HH (DD, WW, MM, YY)
-    
+
     :param qcdata: QC Data array
     :type qcdata: numpy.recarray
     :param output: Output Data array
@@ -448,7 +449,7 @@ def merge_qcdata_res(qcdata, output, res):
 def aggregate_qcdata(qcdata):
     """
     Create DD, WW, MM, and YY aggregations for QC Data from HH
-    
+
     :param qcdata: QC Data array
     :type qcdata: numpy.recarray
     """
@@ -954,7 +955,7 @@ def get_first_last_years(timestamps, first, last, error_str=''):
 
 def gen_stats_zip(filename_list, zipfilename, tier='tier2', csv_processor='ICOS-ETC', zip_processor='LBL_AMP', ts_format="%Y-%m-%d %H:%M:%S"):
     """
-    Generate stats and zip file for file list 
+    Generate stats and zip file for file list
     # ZIP:  filename, fileSize, fileChecksum, fileCount, tier, processor, createDate
     # CSV: zipfilename, filename, fileSize, fileChecksum,  processor, createDate
 

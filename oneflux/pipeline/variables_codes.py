@@ -17,7 +17,8 @@ import logging
 
 from oneflux import ONEFluxError
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 PERC_LABEL = '_QC' # NEW FOR APRIL2016
 

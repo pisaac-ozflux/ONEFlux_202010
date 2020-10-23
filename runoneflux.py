@@ -24,7 +24,8 @@ from oneflux.tools.partition_nt import run_partition_nt, PROD_TO_COMPARE, PERC_T
 from oneflux.tools.partition_dt import run_partition_dt
 from oneflux.tools.pipeline import run_pipeline, NOW_TS
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 DEFAULT_LOGGING_FILENAME = 'oneflux.log'
 # PRI 2020/10/22 - add gap_fill to command list

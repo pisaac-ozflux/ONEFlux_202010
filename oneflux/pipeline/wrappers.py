@@ -43,8 +43,8 @@ from oneflux.tools.partition_dt import run_partition_dt
 
 DEFAULT_LOGGING_FILENAME = 'report_{s}_{h}_{t}.log'.format(h=HOSTNAME, t=NOW_TS, s='{s}')
 
-log = logging.getLogger(__name__)
-
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 class Pipeline(object):
     '''

@@ -2,7 +2,7 @@
 oneflux.tools.partition_dt
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Execution controller module for DT partitioning method
 
@@ -27,7 +27,8 @@ from oneflux.partition.library import STRING_HEADERS, DT_OUTPUT_DIR, EXTRA_FILEN
 from oneflux.graph.compare import plot_comparison, compute_plot_param_diffs
 from oneflux.utils.files import file_exists_not_empty, check_create_directory
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 HOSTNAME = socket.gethostname()
 
@@ -138,7 +139,7 @@ def run_partition_dt(datadir, siteid, sitedir, years_to_compare,
     :type filename_template: str
     :param prod_to_compare: list of products to compare ('c', 'y') - CUT/VUT
     :type prod_to_compare: list
-    :param perc_to_compare: list of percentiles to compare ('1.25', '3.75', ..., '50', ..., '96.25', '98.75') 
+    :param perc_to_compare: list of percentiles to compare ('1.25', '3.75', ..., '50', ..., '96.25', '98.75')
     :type perc_to_compare: list
     :param py_remove_old: if True, removes old python partitioning results (after backup), file has to be missing for run
     :type py_remove_old: bool

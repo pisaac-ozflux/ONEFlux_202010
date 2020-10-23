@@ -2,7 +2,7 @@
 oneflux.pipeline.aux_info_files
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Handling of auxiliary and info files
 
@@ -71,7 +71,8 @@ from oneflux.pipeline.common import METEO_INFO, NEE_INFO, NEEDIR_PATTERN, NEE_PE
                                      MPDIR, CPDIR, test_pattern
 from __builtin__ import enumerate
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 AUX_HEADER = ['ID', 'VARIABLE', 'PARAMETER', 'VALUE', 'TIMESTAMP']
 PERCENTILES = ['1.25', '3.75', '6.25', '8.75', '11.25', '13.75', '16.25', '18.75',

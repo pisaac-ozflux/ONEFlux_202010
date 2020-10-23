@@ -22,7 +22,8 @@ from oneflux.pipeline.wrappers import Pipeline
 from oneflux.pipeline.common import TOOL_DIRECTORY, MCR_DIRECTORY, ONEFluxPipelineError, NOW_TS
 from oneflux.tools.partition_nt import PROD_TO_COMPARE, PERC_TO_COMPARE
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 
 def run_pipeline(datadir, siteid, sitedir, firstyear, lastyear, version_data=VERSION_METADATA,

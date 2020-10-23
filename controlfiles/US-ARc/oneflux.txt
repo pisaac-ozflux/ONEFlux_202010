@@ -1,0 +1,18 @@
+level = oneflux
+[Files]
+    data_dir = ../datadir/
+    site_dir = US-ARc_sample_input
+    mcr_dir = /home/peter/bin/matlab/v94/
+    log_file = fluxnet_pipeline_US-ARc.log
+[Site]
+    site_id = US-ARc
+[Run]
+    command = gap_fill
+    first_year = 2005
+    last_year = 2006
+[Options]
+    force_py = Yes
+    logging_level = info
+    percentiles = default
+    products = default
+    recint = hh

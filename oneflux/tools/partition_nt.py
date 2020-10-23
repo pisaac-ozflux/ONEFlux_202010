@@ -30,7 +30,8 @@ from oneflux.graph.compare import plot_comparison, plot_e0_comparison, plot_para
 from oneflux.utils.files import file_exists_not_empty, check_create_directory
 
 
-log = logging.getLogger(__name__)
+#log = logging.getLogger(__name__)
+log = logging.getLogger("oneflux_log")
 
 HOSTNAME = socket.gethostname()
 
