@@ -2,7 +2,7 @@
 oneflux.tools.pipeline
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Execution controller module for full pipeline runs
 
@@ -25,7 +25,10 @@ from oneflux.tools.partition_nt import PROD_TO_COMPARE, PERC_TO_COMPARE
 log = logging.getLogger(__name__)
 
 
-def run_pipeline(datadir, siteid, sitedir, firstyear, lastyear, version_data=VERSION_METADATA, version_proc=VERSION_PROCESSING, prod_to_compare=PROD_TO_COMPARE, perc_to_compare=PERC_TO_COMPARE, mcr_directory=None, timestamp=NOW_TS, record_interval='hh'):
+def run_pipeline(datadir, siteid, sitedir, firstyear, lastyear, version_data=VERSION_METADATA,
+                 version_proc=VERSION_PROCESSING, prod_to_compare=PROD_TO_COMPARE,
+                 perc_to_compare=PERC_TO_COMPARE, mcr_directory=None, timestamp=NOW_TS,
+                 record_interval='hh', pipeline_steps=None):
 
     sitedir_full = os.path.abspath(os.path.join(datadir, sitedir))
     if not sitedir or not os.path.isdir(sitedir_full):
@@ -51,19 +54,20 @@ def run_pipeline(datadir, siteid, sitedir, firstyear, lastyear, version_data=VER
                     fluxnet2015_version_data=version_data,
                     fluxnet2015_version_processing=version_proc,
                     ustar_cp_mcr_dir=mcr_directory,
-                    qc_auto_execute=True,
-                    ustar_mp_execute=True,
-                    ustar_cp_execute=True,
-                    meteo_proc_execute=True,
-                    nee_proc_execute=True,
-                    energy_proc_execute=True,
-                    nee_partition_nt_execute=True,
-                    nee_partition_dt_execute=True,
-                    prepare_ure_execute=True,
-                    ure_execute=True,
-                    fluxnet2015_execute=True,
-                    fluxnet2015_site_plots=True,
-                    simulation=False)
+                    # PRI 2020/10/22 - replace hard coded logicals with pipeline_steps
+                    qc_auto_execute=pipeline_steps["qc_auto_execute"],
+                    ustar_mp_execute=pipeline_steps["ustar_mp_execute"],
+                    ustar_cp_execute=pipeline_steps["ustar_cp_execute"],
+                    meteo_proc_execute=pipeline_steps["meteo_proc_execute"],
+                    nee_proc_execute=pipeline_steps["nee_proc_execute"],
+                    energy_proc_execute=pipeline_steps["energy_proc_execute"],
+                    nee_partition_nt_execute=pipeline_steps["nee_partition_nt_execute"],
+                    nee_partition_dt_execute=pipeline_steps["nee_partition_dt_execute"],
+                    prepare_ure_execute=pipeline_steps["prepare_ure_execute"],
+                    ure_execute=pipeline_steps["ure_execute"],
+                    fluxnet2015_execute=pipeline_steps["fluxnet2015_execute"],
+                    fluxnet2015_site_plots=pipeline_steps["fluxnet2015_site_plots"],
+                    simulation=pipeline_steps["simulation"])
         pipeline.run()
         #csv_manifest_entries, zip_manifest_entries = pipeline.fluxnet2015.csv_manifest_entries, pipeline.fluxnet2015.zip_manifest_entries
         log.info("Finished processing site dir {d}".format(d=sitedir_full))

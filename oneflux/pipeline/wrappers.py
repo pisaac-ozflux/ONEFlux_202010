@@ -2,7 +2,7 @@
 oneflux.pipeline.wrappers
 
 For license information:
-see LICENSE file or headers in oneflux.__init__.py 
+see LICENSE file or headers in oneflux.__init__.py
 
 Pipeline execution controller wrappers
 
@@ -48,7 +48,7 @@ log = logging.getLogger(__name__)
 
 class Pipeline(object):
     '''
-    ONEFlux Pipeline execution controller class 
+    ONEFlux Pipeline execution controller class
     '''
     RECORD_INTERVAL = 'hh'
     VALIDATE_ON_CREATE = False
@@ -178,26 +178,6 @@ class Pipeline(object):
 
         ### validation
         # list all steps
-        #self.drivers = [self.fp_creator,
-                        #self.qc_visual,
-                        #self.qc_auto,
-                        #self.qc_auto_convert,
-                        #self.qc_visual_cross,
-                        #self.ustar_mp,
-                        #self.ustar_cp,
-                        #self.meteo_era,
-                        #self.meteo_mds,
-                        #self.meteo_proc,
-                        #self.nee_proc,
-                        #self.energy_proc,
-                        #self.nee_partition_nt,
-                        #self.nee_partition_dt,
-                        #self.nee_partition_sr,
-                        #self.prepare_ure,
-                        #self.ure,
-                        #self.fluxnet2015,
-                       #]
-        # PRI 2020/10/21 - remove ustar_cp from processing list
         self.drivers = [self.fp_creator,
                         self.qc_visual,
                         self.qc_auto,
@@ -298,7 +278,7 @@ class PipelineFPCreator(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of fp_creator step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -380,7 +360,7 @@ class PipelineQCVisual(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of qc_visual step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -451,7 +431,7 @@ class PipelineQCAuto(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of qc_auto step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -512,8 +492,8 @@ class PipelineQCAutoConvert(object):
     Class to execute qc_auto_convert step.
     Converts outputs from qc_auto step from previous versions
     into current version for subsequent processing steps.
-    
-    This is a legacy step and should not be needed on any new run.    
+
+    This is a legacy step and should not be needed on any new run.
     '''
     QC_AUTO_CONVERT_EXECUTE = False # Legacy step, default is not to run
     QC_AUTO_CONVERT_DIR = "02_qc_auto"
@@ -527,7 +507,7 @@ class PipelineQCAutoConvert(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of qc_auto step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -607,7 +587,7 @@ class PipelineQCAutoConvert(object):
 class PipelineQCVisualCross(object):
     '''
     Class to control execution of qc_visual_cross step.
-    
+
     This is an external step and is only necessary for extended QA/QC activities.
     '''
     QC_VISUAL_CROSS_EXECUTE = False # TODO: change default when method implemented
@@ -616,7 +596,7 @@ class PipelineQCVisualCross(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of qc_visual_cross step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -674,7 +654,7 @@ class PipelineUstarMP(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of ustar_mp step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -751,7 +731,7 @@ class PipelineUstarCP(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of ustar_cp step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -806,7 +786,9 @@ class PipelineUstarCP(object):
         Validate post-execution results
         '''
         # check output directory
-        test_dir(tdir=self.ustar_cp_dir, label='{s}.post_validate'.format(s=self.label))
+        #test_dir(tdir=self.ustar_cp_dir, label='{s}.post_validate'.format(s=self.label))
+        # PRI 2020/10/22 - warn if ustar_cp_dir doesn't exist, don't raise an exception
+        test_dir(tdir=self.ustar_cp_dir, label='{s}.post_validate'.format(s=self.label), log_only=True)
 
         # check output files and result report (log)
         test_file_list(file_list=self.output_file_patterns, tdir=self.ustar_cp_dir, label='{s}.post_validate'.format(s=self.label), log_only=True)
@@ -872,7 +854,7 @@ class PipelineUstarCP(object):
 class PipelineMeteoERA(object):
     '''
     Class to control execution of meteo_era step.
-    
+
     N.B.: Step dependent on external Python code to be integrated in future releases.
     '''
     METEO_ERA_EXECUTE = False # TODO: change default when method implemented
@@ -899,7 +881,7 @@ class PipelineMeteoERA(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of meteo_era step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -936,7 +918,7 @@ class PipelineMeteoERA(object):
         If percentage of missing values is not in range (0-100) or
         if more than two variables have 100% missing, stops execution
         (returns False if simulation only)
-        
+
         :param filename: full path of file to be checked (default used if not provided)
         :type filename: str
         :rtype: bool
@@ -1014,7 +996,7 @@ class PipelineMeteoMDS(object):
     Class to control execution of meteo_mds step.
     Executes the Meteorological variables
     gap-filling using MDS implementation.
-    
+
     Step not used in ONEFlux Pipeline (MDS method applied within meteo_proc, nee_proc, energy_proc steps.
     '''
     METEO_MDS_EXECUTE = False # TODO: change default when method implemented
@@ -1030,7 +1012,7 @@ class PipelineMeteoMDS(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of meteo_mds step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1149,7 +1131,7 @@ class PipelineMeteoProc(object):
     def __init__(self, pipeline):
         '''
         Initializes paramters for execution of meteo_proc step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1270,7 +1252,7 @@ class PipelineNEEProc(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of nee_proc step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1388,7 +1370,7 @@ class PipelineEnergyProc(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of energy_proc step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1479,7 +1461,7 @@ class PipelineNEEPartitionNT(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of nee_partition_nt step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1663,7 +1645,7 @@ class PipelineNEEPartitionSR(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of nee_partition_sr step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1730,7 +1712,7 @@ class PipelinePrepareUREPW(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of ure step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1821,7 +1803,7 @@ class PipelinePrepareURE(object):
     def __init__(self, pipeline, perc=PERC_TO_COMPARE, prod=PROD_TO_COMPARE):
         '''
         Initializes parameters for execution of ure step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -1864,7 +1846,7 @@ class PipelinePrepareURE(object):
     def check_cleanup_nt(self, reco, gpp, filename):
         """
         Checks and data cleanup for NT partitioning results
-        
+
         :param reco: RECO results from NT partitioning
         :type reco: numpy.ndarray
         :param gpp: GPP results from NT partitioning
@@ -1904,7 +1886,7 @@ class PipelinePrepareURE(object):
 
     def check_cleanup_dt(self, reco, gpp, filename):
         """
-        
+
         :param reco: RECO results from DT partitioning
         :type reco: numpy.ndarray
         :param gpp: GPP results from DT partitioning
@@ -2154,7 +2136,7 @@ class PipelineURE(object):
     def __init__(self, pipeline):
         '''
         Initializes parameters for execution of ure step
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
@@ -2247,7 +2229,7 @@ class PipelineFLUXNET2015(object):
         '''
         Initializes parameters for execution of step to generate
         FLUXNET2015 data product
-        
+
         :param pipeline: ONEFlux Pipeline object driving the execution
         :type pipeline: Pipeline
         '''
