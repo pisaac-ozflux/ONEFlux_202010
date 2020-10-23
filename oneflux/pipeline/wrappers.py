@@ -477,7 +477,9 @@ class PipelineQCAuto(object):
 
         create_replace_dir(tdir=self.qc_auto_dir, label='{s}.run'.format(s=self.label), suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info('Execution command: {c}'.format(c=self.cmd))
+        #log.info('Execution command: {c}'.format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:
@@ -700,7 +702,9 @@ class PipelineUstarMP(object):
 
         create_replace_dir(tdir=self.ustar_mp_dir, label='{s}.run'.format(s=self.label), suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info('Execution command: {c}'.format(c=self.cmd))
+        #log.info('Execution command: {c}'.format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:
@@ -803,7 +807,9 @@ class PipelineUstarCP(object):
 
         create_replace_dir(tdir=self.ustar_cp_dir, label='{s}.run'.format(s=self.label), suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info('Execution command: {c}'.format(c=self.cmd))
+        #log.info('Execution command: {c}'.format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:
@@ -1061,8 +1067,10 @@ class PipelineMeteoMDS(object):
 
         cp_data = "{copy} {i}*_meteo_*.csv {o}".format(copy=COPY, i=einput, o=os.path.join(eoutput, 'input') + os.sep)
         cp_data_nee = "{copy} {i}*_nee_*.csv {o}".format(copy=COPY, i=einput, o=os.path.join(eoutput, 'input_nee') + os.sep)
-        log.info("Data copy command '{c}'".format(c=cp_data))
-        log.info("Data copy command '{c}' (NEE)".format(c=cp_data_nee))
+        #log.info("Data copy command '{c}'".format(c=cp_data))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug("Data copy command '{c}'".format(c=cp_data))
+        log.debug("Data copy command '{c}' (NEE)".format(c=cp_data_nee))
         if not self.simulation:
             os.system(cp_data)
             os.system(cp_data_nee)
@@ -1080,13 +1088,14 @@ class PipelineMeteoMDS(object):
         cmd_nee = "cd {o} {cmd_sep} ./{c} -input={f} -output={n} -tofill=NEE > {l}".format(cmd_sep=CMD_SEP, o=eoutput, c=os.path.basename(self.ex_meteomds), f=input_filenames_nee, n=os.path.join(self.meteomds, 'nee') + os.sep, l=eoutput_log[:-4] + '_nee.txt')
         del_tool = "{delete} {o}{c}".format(delete=DELETE, o=eoutput, c=os.path.basename(self.ex_meteomds))
 
-        log.info("Tool copy command '{c}'".format(c=cp_tool))
-        log.info("Execution Ta   command '{c}'".format(c=cmd_ta))
-        log.info("Execution SWin command '{c}'".format(c=cmd_swin))
-        log.info("Execution VPD  command '{c}'".format(c=cmd_vpd))
-        log.info("Execution RH   command '{c}'".format(c=cmd_rh))
-        log.info("Execution NEE  command '{c}'".format(c=cmd_nee))
-        log.info("Tool delete command '{c}'".format(c=del_tool))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug("Tool copy command '{c}'".format(c=cp_tool))
+        log.debug("Execution Ta   command '{c}'".format(c=cmd_ta))
+        log.debug("Execution SWin command '{c}'".format(c=cmd_swin))
+        log.debug("Execution VPD  command '{c}'".format(c=cmd_vpd))
+        log.debug("Execution RH   command '{c}'".format(c=cmd_rh))
+        log.debug("Execution NEE  command '{c}'".format(c=cmd_nee))
+        log.debug("Tool delete command '{c}'".format(c=del_tool))
         if not self.simulation:
             os.system(cp_tool)
             os.system(cmd_ta)
@@ -1095,7 +1104,6 @@ class PipelineMeteoMDS(object):
             os.system(cmd_rh)
             os.system(cmd_nee)
             os.system(del_tool)
-
 
 
 class PipelineMeteoProc(object):
@@ -1195,7 +1203,9 @@ class PipelineMeteoProc(object):
 
         create_replace_dir(tdir=self.meteo_proc_dir, label='meteo_proc.run', suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info("Execution command '{c}'".format(c=self.cmd))
+        #log.info("Execution command '{c}'".format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info("Simulation only, meteo_proc execution command skipped")
         else:
@@ -1330,7 +1340,9 @@ class PipelineNEEProc(object):
 
         create_replace_dir(tdir=self.nee_proc_dir, label='nee_proc.run', suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info("Execution command '{c}'".format(c=self.cmd))
+        #log.info("Execution command '{c}'".format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info("Simulation only, nee_proc execution command skipped")
         else:
@@ -1424,10 +1436,17 @@ class PipelineEnergyProc(object):
         create_replace_dir(tdir=self.energy_proc_dir, label='energy_proc.run', suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
         test_create_dir(tdir=self.energy_proc_input_dir, label='energy_proc.run', simulation=self.pipeline.simulation)
 
-        log.info("Data copy command '{c}'".format(c=self.cmd_cp_data))
-        log.info("Tool copy command '{c}'".format(c=self.cmd_cp_tool))
-        log.info("Execution command '{c}'".format(c=self.cmd_execute))
-        log.info("Tool delete command '{c}'".format(c=self.cmd_del_tool))
+        #log.info("Data copy command '{c}'".format(c=self.cmd_cp_data))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug("Data copy command '{c}'".format(c=self.cmd_cp_data))
+        #log.info("Tool copy command '{c}'".format(c=self.cmd_cp_tool))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug("Tool copy command '{c}'".format(c=self.cmd_cp_tool))
+        #log.info("Execution command '{c}'".format(c=self.cmd_execute))
+        log.debug("Execution command '{c}'".format(c=self.cmd_execute))
+        #log.info("Tool delete command '{c}'".format(c=self.cmd_del_tool))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug("Tool delete command '{c}'".format(c=self.cmd_del_tool))
         if self.pipeline.simulation:
             log.info("Simulation only, energy_proc execution command skipped")
         else:
@@ -1503,7 +1522,9 @@ class PipelineNEEPartitionNT(object):
 
         create_replace_dir(tdir=self.nee_partition_nt_dir, label='{s}.run'.format(s=self.label), suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info('Execution command: oneflux.tools.partition_nt.run_partition_nt()')
+        #log.info('Execution command: oneflux.tools.partition_nt.run_partition_nt()')
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: oneflux.tools.partition_nt.run_partition_nt()')
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:
@@ -1594,7 +1615,9 @@ class PipelineNEEPartitionDT(object):
         rerun_call = False
 
         # call partitioning and catches optimization fail exceptions
-        log.info('Execution command: oneflux.tools.partition_dt.run_partition_dt()')
+        #log.info('Execution command: oneflux.tools.partition_dt.run_partition_dt()')
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: oneflux.tools.partition_dt.run_partition_dt()')
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:
@@ -2185,7 +2208,9 @@ class PipelineURE(object):
 
         create_replace_dir(tdir=self.ure_dir, label='{s}.run'.format(s=self.label), suffix=self.pipeline.run_id, simulation=self.pipeline.simulation)
 
-        log.info('Execution command: {c}'.format(c=self.cmd))
+        #log.info('Execution command: {c}'.format(c=self.cmd))
+        # PRI 2020/10/23 - system commands to DEBUG level
+        log.debug('Execution command: {c}'.format(c=self.cmd))
         if self.pipeline.simulation:
             log.info('Simulation only, {s} execution command skipped'.format(s=self.label))
         else:

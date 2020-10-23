@@ -1,0 +1,17 @@
+level = oneflux
+[Files]
+    data_dir = Right click to browse
+    site_dir = Right click to browse
+    mcr_dir = Right click to browse
+    log_file = Right click to browse
+[Site]
+    site_id = CC-XXX
+[Run]
+    command = all #partition_nt, partition_dt
+    first_year = YYYY
+    last_year = YYYY
+[Options]
+    percentiles = 5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95
+    products = VUT #CUT
+    force_py = Yes
+    recint = hh #hr
