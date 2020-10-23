@@ -24,7 +24,8 @@ from oneflux.tools.pipeline import run_pipeline, NOW_TS
 log = logging.getLogger(__name__)
 
 DEFAULT_LOGGING_FILENAME = 'oneflux.log'
-COMMAND_LIST = ['partition_nt', 'partition_dt', 'all']
+# PRI 2020/10/22 - add gap_fill to command list
+COMMAND_LIST = ['partition_nt', 'partition_dt', 'all', 'gap_fill']
 
 # main function
 if __name__ == '__main__':
@@ -81,9 +82,37 @@ if __name__ == '__main__':
         # run command
         log.info("Starting execution: {c}".format(c=args.command))
         if args.command == 'all':
-            run_pipeline(datadir=args.datadir, siteid=args.siteid, sitedir=args.sitedir, firstyear=firstyear, lastyear=lastyear,
-                         prod_to_compare=prod, perc_to_compare=perc, mcr_directory=args.mcr_directory, timestamp=args.timestamp,
-                         record_interval=args.recint, version_data=args.versiond, version_proc=args.versionp)
+            # PRI 2020/10/22
+            # dictionary of logicals to control which pipeline steps will be executed
+            pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
+                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "nee_proc_execute": True, "energy_proc_execute": True,
+                              "nee_partition_nt_execute": True, "nee_partition_dt_execute": True,
+                              "prepare_ure_execute": True, "ure_execute": True,
+                              "fluxnet2015_execute": True, "fluxnet2015_site_plots": True,
+                              "simulation": False}
+            run_pipeline(datadir=args.datadir, siteid=args.siteid, sitedir=args.sitedir,
+                         firstyear=firstyear, lastyear=lastyear, prod_to_compare=prod,
+                         perc_to_compare=perc, mcr_directory=args.mcr_directory,
+                         timestamp=args.timestamp, record_interval=args.recint,
+                         version_data=args.versiond, version_proc=args.versionp,
+                         pipeline_steps=pipeline_steps)
+        elif args.command == 'gap_fill':
+            # PRI 2020/10/22
+            # dictionary of logicals to control which pipeline steps will be executed
+            pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
+                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "nee_proc_execute": True, "energy_proc_execute": True,
+                              "nee_partition_nt_execute": False, "nee_partition_dt_execute": False,
+                              "prepare_ure_execute": False, "ure_execute": False,
+                              "fluxnet2015_execute": False, "fluxnet2015_site_plots": False,
+                              "simulation": False}
+            run_pipeline(datadir=args.datadir, siteid=args.siteid, sitedir=args.sitedir,
+                         firstyear=firstyear, lastyear=lastyear, prod_to_compare=prod,
+                         perc_to_compare=perc, mcr_directory=args.mcr_directory,
+                         timestamp=args.timestamp, record_interval=args.recint,
+                         version_data=args.versiond, version_proc=args.versionp,
+                         pipeline_steps=pipeline_steps)
         elif args.command == 'partition_nt':
             run_partition_nt(datadir=args.datadir, siteid=args.siteid, sitedir=args.sitedir, years_to_compare=range(firstyear, lastyear + 1),
                              py_remove_old=args.forcepy, prod_to_compare=prod, perc_to_compare=perc)
