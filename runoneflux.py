@@ -128,7 +128,7 @@ if __name__ == '__main__':
             # PRI 2020/10/22
             # dictionary of logicals to control which pipeline steps will be executed
             pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
-                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "ustar_cp_execute": True, "meteo_proc_execute": True,
                               "nee_proc_execute": True, "energy_proc_execute": True,
                               "nee_partition_nt_execute": True, "nee_partition_dt_execute": True,
                               "prepare_ure_execute": True, "ure_execute": True,
@@ -145,7 +145,7 @@ if __name__ == '__main__':
             # PRI 2020/10/22
             # dictionary of logicals to control which pipeline steps will be executed
             pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
-                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "ustar_cp_execute": True, "meteo_proc_execute": True,
                               "nee_proc_execute": True, "energy_proc_execute": True,
                               "nee_partition_nt_execute": False, "nee_partition_dt_execute": False,
                               "prepare_ure_execute": False, "ure_execute": False,

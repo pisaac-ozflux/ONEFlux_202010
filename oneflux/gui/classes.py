@@ -3,11 +3,13 @@ import copy
 import datetime
 import logging
 import os
+import sys
+import traceback
 # 3rd party modules
 from configobj import ConfigObj
 from PyQt5 import QtCore, QtGui, QtWidgets
 # ONEFlux modules
-from oneflux import ONEFluxError, log_config, VERSION_PROCESSING, VERSION_METADATA
+from oneflux import ONEFluxError, log_config, log_trace, VERSION_PROCESSING, VERSION_METADATA
 from oneflux.tools.partition_nt import run_partition_nt, PROD_TO_COMPARE, PERC_TO_COMPARE
 from oneflux.tools.partition_dt import run_partition_dt
 from oneflux.tools.pipeline import run_pipeline
@@ -85,7 +87,7 @@ def do_run_oneflux(cfg):
             # PRI 2020/10/22
             # dictionary of logicals to control which pipeline steps will be executed
             pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
-                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "ustar_cp_execute": True, "meteo_proc_execute": True,
                               "nee_proc_execute": True, "energy_proc_execute": True,
                               "nee_partition_nt_execute": True, "nee_partition_dt_execute": True,
                               "prepare_ure_execute": True, "ure_execute": True,
@@ -102,7 +104,7 @@ def do_run_oneflux(cfg):
             # PRI 2020/10/22
             # dictionary of logicals to control which pipeline steps will be executed
             pipeline_steps = {"qc_auto_execute": True, "ustar_mp_execute": True,
-                              "ustar_cp_execute": False, "meteo_proc_execute": True,
+                              "ustar_cp_execute": True, "meteo_proc_execute": True,
                               "nee_proc_execute": True, "energy_proc_execute": True,
                               "nee_partition_nt_execute": False, "nee_partition_dt_execute": False,
                               "prepare_ure_execute": False, "ure_execute": False,

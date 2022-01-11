@@ -88,8 +88,8 @@ class Pipeline(object):
                         PipelineURE,
                         PipelineFLUXNET2015,
                        ]
-
-        self.valid_attribute_labels = ['data_dir', 'tool_dir', 'data_dir_main', 'prod_to_compare', 'perc_to_compare', 'first_year', 'last_year']
+        # PRI 25/12/2021 add site_dir to valid attributes
+        self.valid_attribute_labels = ['data_dir', 'site_dir', 'tool_dir', 'data_dir_main', 'prod_to_compare', 'perc_to_compare', 'first_year', 'last_year']
         for driver in self.driver_classes:
             labels = [k.lower() for k, v in driver.__dict__.iteritems() if ((not callable(v)) and (not k.startswith('_')))]
             self.valid_attribute_labels.extend(labels)
@@ -184,7 +184,7 @@ class Pipeline(object):
                         self.qc_auto_convert,
                         self.qc_visual_cross,
                         self.ustar_mp,
-                        #self.ustar_cp,
+                        self.ustar_cp,
                         self.meteo_era,
                         self.meteo_mds,
                         self.meteo_proc,
@@ -868,20 +868,23 @@ class PipelineMeteoERA(object):
     _OUTPUT_FILE_PATTERNS = [
         "{s}_????.csv",
         "stat_{s}.txt",
-        "stat30_{s}_nocorr.txt",
+        # PRI 2022/01/10 - I don't think this is used
+        #"stat30_{s}_nocorr.txt",
+        # PRI 2022/01/10 - stat30_{s}.txt is used by meteo_proc/dataset.c
         "stat30_{s}.txt",
     ]
     _OUTPUT_FILE_PATTERNS_EXTRA = [
-        "{s}_????-????.nc",
-        "{s}_LWin_????-????.pdf", # missing for some sites
-        "{s}_LWin_calc_????-????.pdf", # missing for some sites
-        "{s}_nocorr_????.csv",
-        "{s}_Pa_????-????.pdf", # missing for some sites
-        "{s}_Precip_????-????.pdf", # missing for some sites
-        "{s}_Rg_????-????.pdf", # missing for some sites
-        "{s}_Ta_????-????.pdf", # missing for some sites
-        "{s}_VPD_????-????.pdf", # missing for some sites
-        "{s}_WS_????-????.pdf", # missing for some sites
+        # PRI 2022/01/10 - suppress warning messages
+        #"{s}_????-????.nc",
+        #"{s}_LWin_????-????.pdf", # missing for some sites
+        #"{s}_LWin_calc_????-????.pdf", # missing for some sites
+        #"{s}_nocorr_????.csv",
+        #"{s}_Pa_????-????.pdf", # missing for some sites
+        #"{s}_Precip_????-????.pdf", # missing for some sites
+        #"{s}_Rg_????-????.pdf", # missing for some sites
+        #"{s}_Ta_????-????.pdf", # missing for some sites
+        #"{s}_VPD_????-????.pdf", # missing for some sites
+        #"{s}_WS_????-????.pdf", # missing for some sites
     ]
 
     def __init__(self, pipeline):

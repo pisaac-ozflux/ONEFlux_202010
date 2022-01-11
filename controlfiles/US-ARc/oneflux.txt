@@ -1,7 +1,7 @@
 level = oneflux
 [Files]
-    data_dir = ../datadir/
-    site_dir = US-ARc_sample_input
+    data_dir = /home/peter/datadir/
+    site_dir = US-ARc
     mcr_dir = /home/peter/bin/matlab/v94/
     log_file = fluxnet_pipeline_US-ARc.log
 [Site]
