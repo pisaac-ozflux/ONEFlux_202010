@@ -1,9 +1,7 @@
 # standard modules
 import datetime
-import logging
+import faulthandler
 import os
-import platform
-import sys
 import traceback
 import warnings
 # 3rd party modules
@@ -13,6 +11,7 @@ from PyQt5 import QtWidgets
 from oneflux.gui.classes import myPlainTextEditLogger, init_logger, edit_control_file, myMessageBox
 from oneflux.gui.classes import do_run_oneflux
 
+faulthandler.enable()
 warnings.filterwarnings("ignore", category=Warning)
 
 # now check the required directories are present

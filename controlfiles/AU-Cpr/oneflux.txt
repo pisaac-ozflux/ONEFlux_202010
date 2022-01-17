@@ -1,0 +1,18 @@
+level = oneflux
+[Files]
+    data_dir = /home/peter/datadir/
+    site_dir = AU-Cpr
+    mcr_dir = /home/peter/bin/matlab/v94/
+    log_file = fluxnet_pipeline_AU-Cpr.log
+[Site]
+    site_id = AU-Cpr
+[Run]
+    command = all
+    first_year = 2011
+    last_year = 2019
+[Options]
+    force_py = Yes
+    logging_level = info
+    percentiles = default
+    products = default
+    recint = hh

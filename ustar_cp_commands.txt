@@ -1,0 +1,11 @@
+# the first 2 are done using os.environ in PipelineUstarCP.run_ustarcp()
+export MCR_ROOT='/home/peter/bin/matlab/v94/'
+export LD_LIBRARY_PATH='/home/peter/bin/matlab/v94/runtime/glnxa64:/home/peter/bin/matlab/v94/bin/glnxa64:/home/peter/bin/matlab/v94/sys/os/glnxa64:/home/peter/bin/matlab/v94/sys/opengl/lib/glnxa64'
+# the rest are done as self.cmd in PipelineUstarCP.__init__()
+cd "/home/peter/datadir/US-ARc/05_ustar_cp/"
+mkdir input
+cp -av "/home/peter/datadir/US-ARc/02_qc_auto/"*_ustar_*.csv ./input/
+cp -av /home/peter/ONEFlux/bin/ustar_cp .
+cd "/home/peter/datadir/US-ARc/05_ustar_cp/"
+./ustar_cp "/home/peter/datadir/US-ARc/05_ustar_cp/input/" "/home/peter/datadir/US-ARc/05_ustar_cp/"> "/home/peter/datadir/US-ARc/05_ustar_cp/report_morgan_run20220113T113819.txt"
+rm -v ustar_cp

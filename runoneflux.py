@@ -17,6 +17,9 @@ import argparse
 import traceback
 # PRI 2020/10/23 - imports to support control files
 from configobj import ConfigObj
+# PRI 2022/01/16 - imports to track segfaults
+import faulthandler
+faulthandler.enable()
 import datetime
 
 from oneflux import ONEFluxError, log_config, log_trace, VERSION_PROCESSING, VERSION_METADATA

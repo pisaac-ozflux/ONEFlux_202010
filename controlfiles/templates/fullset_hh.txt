@@ -1,0 +1,527 @@
+level = L1
+[Files]
+    file_path = Right click to browse
+    in_filename = Right click to browse (*.csv)
+    in_firstdatarow = 5
+    in_headerrow = 2
+    out_filename = Right click to browse (*.nc)
+[Global]
+    Conventions = CF-1.8
+    acknowledgement = '''This work used eddy covariance data collected by the TERN Ecosystem
+Processes facility. Ecosystem Processes would like to acknowledge the financial support of the
+Australian Federal Government via the National Collaborative Research Infrastructure Scheme
+and the Education Investment Fund.'''
+    altitude = <altitude>m
+    canopy_height = <canopy_height>m
+    comment = 
+    contact = 
+    data_link = http://data.ozflux.org.au/
+    featureType = timeSeries
+    fluxnet_id = 
+    history = June 2021 processing
+    institution = 
+    latitude = <latitude>
+    license = https://creativecommons.org/licenses/by/4.0/
+    license_name = CC BY 4.0
+    longitude = <longitude>
+    metadata_link = http://http://www.ozflux.org.au/monitoringsites/<site_name>/index.html
+    ozflux_link = http://ozflux.org.au/
+    publisher_name = TERN Ecosystem Processes,OzFlux
+    references = 
+    site_name = <site_name>
+    site_pi = 
+    soil = 
+    source = 
+    time_step = 30
+    time_zone = <country>/<time_zone>
+    title = Flux tower data set from the <site_name> site for the calendar year <year>
+    tower_height = 
+    vegetation = 
+[Variables]
+    [[AGC_IRGA]]
+        [[[Attr]]]
+            instrument = <irga_type>
+            long_name = IRGA automatic gain control value
+            statistic_type = average
+            units = 1
+        [[[csv]]]
+            name = AGC_7500_Avg
+    [[AH_<inst>_<height>m]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Absolute humidity
+            standard_name = mass_concentration_of_water_vapor_in_air
+            statistic_type = average
+            units = g/m^3
+        [[[csv]]]
+            name = Ah_<inst>_01_Avg
+    [[AH_IRGA_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <irga_type>
+            long_name = Absolute humidity
+            standard_name = mass_concentration_of_water_vapor_in_air
+            statistic_type = average
+            units = g/m^3
+        [[[csv]]]
+            name = Ah_7500_Avg
+    [[AH_IRGA_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <irga_type>
+            long_name = Absolute humidity
+            statistic_type = variance
+            units = g^2/m^6
+        [[[csv]]]
+            name = covAhAh
+    [[CO2_IRGA_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <irga_type>
+            long_name = CO2 concentration
+            standard_name = mass_concentration_of_carbon_dioxide_in_air
+            statistic_type = average
+            units = mg/m^3
+        [[[csv]]]
+            name = Cc_7500_Avg
+    [[CO2_IRGA_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <irga_type>
+            long_name = CO2 concentration
+            statistic_type = variance
+            units = mg^2/m^6
+        [[[csv]]]
+            name = covCcCc
+    [[Diag_IRGA]]
+        [[[Attr]]]
+            instrument = <irga_type>
+            long_name = IRGA diagnostic value
+            statistic_type = average
+            units = 1
+        [[[csv]]]
+            name = 7500_Warn
+    [[Diag_SONIC]]
+        [[[Attr]]]
+            instrument = <sonic_type>
+            long_name = Sonic diagnostic value
+            statistic_type = average
+            units = 1
+        [[[csv]]]
+            name = CSAT_Warn
+    [[Fg_<depth>cma]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Ground heat flux
+            standard_name = downward_heat_flux_at_ground_level_in_soil
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fg_01_Avg
+    [[Fg_<depth>cmb]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Ground heat flux
+            standard_name = downward_heat_flux_at_ground_level_in_soil
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fg_02_Avg
+    [[Fg_<depth>cmc]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Ground heat flux
+            standard_name = downward_heat_flux_at_ground_level_in_soil
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fg_03_Avg
+    [[Fld]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = Kipp and Zonen CNR4
+            long_name = Down-welling longwave radiation
+            standard_name = surface_downwelling_longwave_flux_in_air
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fld_CNR4_Avg
+    [[Flu]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = Kipp and Zonen CNR4
+            long_name = Up-welling longwave radiation
+            standard_name = surface_upwelling_longwave_flux_in_air
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Flu_CNR4_Avg
+    [[Fn_NR]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = NR Lite
+            long_name = Net radiation
+            standard_name = surface_net_downward_radiative_flux
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fn_NR_Avg
+    [[Fsd]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = Kipp and Zonen CNR4
+            long_name = Down-welling shortwave radiation
+            standard_name = surface_downwelling_shortwave_flux_in_air
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fsd_CNR4_Avg
+    [[Fsu]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = Kipp and Zonen CNR4
+            long_name = Up-welling shortwave radiation
+            standard_name = surface_upwelling_shortwave_flux_in_air
+            statistic_type = average
+            units = W/m^2
+        [[[csv]]]
+            name = Fsu_CNR4_Avg
+    [[Precip]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Rainfall
+            standard_name = thickness_of_rainfall_amount
+            statistic_type = sum
+            units = mm
+        [[[csv]]]
+            name = Rain_Tot
+    [[RH_<inst>_<height>m]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Relative humidity
+            standard_name = relative_humidity
+            statistic_type = average
+            units = percent
+        [[[csv]]]
+            name = RH_<inst>_01_Avg
+    [[Sws_<depth>cma]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil water content
+            standard_name = volume_fraction_of_condensed_water_in_soil
+            statistic_type = average
+            units = m^3/m^3
+        [[[csv]]]
+            name = Sws_01_Avg
+    [[Sws_<depth>cmb]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil water content
+            standard_name = volume_fraction_of_condensed_water_in_soil
+            statistic_type = average
+            units = m^3/m^3
+        [[[csv]]]
+            name = Sws_02_Avg
+    [[Sws_<depth>cmc]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil water content
+            standard_name = volume_fraction_of_condensed_water_in_soil
+            statistic_type = average
+            units = m^3/m^3
+        [[[csv]]]
+            name = Sws_03_Avg
+    [[Ta_<inst>_<height>m]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Air temperature
+            standard_name = air_temperature
+            statistic_type = average
+            units = degC
+        [[[csv]]]
+            name = Ta_<inst>_01_Avg
+    [[Tpanel]]
+        [[[Attr]]]
+            instrument = Campbell Scientific CR3000 logger
+            long_name = Panel temperature at logger
+            units = degC
+        [[[csv]]]
+            name = Tpanel_Avg
+    [[Ts_<depth>cma]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil temperature
+            standard_name = soil_temperature
+            statistic_type = average
+            units = degC
+        [[[csv]]]
+            name = Ts_01_Avg
+    [[Ts_<depth>cmb]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil temperature
+            standard_name = soil_temperature
+            statistic_type = average
+            units = degC
+        [[[csv]]]
+            name = Ts_02_Avg
+    [[Ts_<depth>cmc]]
+        [[[Attr]]]
+            height = <depth>m
+            instrument = <instrument_type>
+            long_name = Soil temperature
+            standard_name = soil_temperature
+            statistic_type = average
+            units = degC
+        [[[csv]]]
+            name = Ts_03_Avg
+    [[Tv_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Virtual temperature
+            standard_name = virtual_temperature
+            statistic_type = average
+            units = degC
+        [[[csv]]]
+            name = Tv_CSAT_Avg
+    [[Tv_SONIC_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Virtual temperature
+            statistic_type = variance
+            units = degC^2
+        [[[csv]]]
+            name = covTvTv
+    [[UxA]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Ux and H2O
+            statistic_type = average
+            units = g/m^2/s
+        [[[csv]]]
+            name = covUxAh
+    [[UxC]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Ux and CO2
+            statistic_type = average
+            units = mg/m^2/s
+        [[[csv]]]
+            name = covUxCc
+    [[UxT]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Ux and T
+            statistic_type = average
+            units = m.degC/s
+        [[[csv]]]
+            name = covUxTv
+    [[UxUy]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Ux and Uy
+            statistic_type = average
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUxUy
+    [[UxUz]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Ux and Uz
+            statistic_type = average
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUzUx
+    [[Ux_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Longitudinal wind velocity component, sonic coordinates
+            statistic_type = average
+            units = m/s
+        [[[csv]]]
+            name = Ux_CSAT_Avg
+    [[Ux_SONIC_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Longitudinal wind velocity component, sonic coordinates
+            statistic_type = variance
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUxUx
+    [[UyA]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Uy and H2O
+            statistic_type = average
+            units = g/m^2/s
+        [[[csv]]]
+            name = covUyAh
+    [[UyC]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Uy and CO2
+            statistic_type = average
+            units = mg/m^2/s
+        [[[csv]]]
+            name = covUyCc
+    [[UyT]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Uy and T
+            statistic_type = average
+            units = m.degC/s
+        [[[csv]]]
+            name = covUyTv
+    [[UyUz]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Uy and Uz
+            statistic_type = average
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUzUy
+    [[Uy_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Lateral wind velocity component, sonic coordinates
+            statistic_type = average
+            units = m/s
+        [[[csv]]]
+            name = Uy_CSAT_Avg
+    [[Uy_SONIC_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Lateral wind velocity component, sonic coordinates
+            statistic_type = variance
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUyUy
+    [[UzA]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Uz and H2O
+            statistic_type = average
+            units = g/m^2/s
+        [[[csv]]]
+            name = covUzAh
+    [[UzC]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>,<irga_type>
+            long_name = Covariance of Uz and CO2
+            statistic_type = average
+            units = mg/m^2/s
+        [[[csv]]]
+            name = covUzCc
+    [[UzT]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Covariance of Uz and T
+            statistic_type = average
+            units = m.degC/s
+        [[[csv]]]
+            name = covUzTv
+    [[Uz_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Vertical wind velocity component, sonic coordinates
+            statistic_type = average
+            units = m/s
+        [[[csv]]]
+            name = Uz_CSAT_Avg
+    [[Uz_SONIC_Vr]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Vertical wind velocity component, sonic coordinates
+            statistic_type = variance
+            units = m^2/s^2
+        [[[csv]]]
+            name = covUzUz
+    [[Vbat]]
+        [[[Attr]]]
+            instrument = Campbell Scientific CR3000 logger
+            long_name = Battery voltage at logger
+            units = V
+        [[[csv]]]
+            name = Vbat_Avg
+    [[Wd_<inst>_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Wind direction
+            standard_name = wind_from_direction
+            statistic_type = average
+            units = degrees
+        [[[csv]]]
+            name = WD_<inst>_Avg
+    [[Wd_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Wind direction
+            standard_name = wind_from_direction
+            statistic_type = average
+            units = degrees
+        [[[csv]]]
+            name = WD_CSAT_Compass_Avg
+    [[Ws_<inst>_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Wind speed
+            standard_name = wind_speed
+            statistic_type = average
+            units = m/s
+        [[[csv]]]
+            name = WS_<inst>_Avg
+    [[Ws_SONIC_Av]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <sonic_type>
+            long_name = Wind speed
+            standard_name = wind_speed
+            statistic_type = average
+            units = m/s
+        [[[csv]]]
+            name = WS_CSAT_Avg
+    [[ps]]
+        [[[Attr]]]
+            height = <height>m
+            instrument = <instrument_type>
+            long_name = Surface air pressure
+            standard_name = surface_air_pressure
+            statistic_type = average
+            units = kPa
+        [[[csv]]]
+            name = ps_7500_Avg

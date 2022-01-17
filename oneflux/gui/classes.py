@@ -17,7 +17,6 @@ from oneflux.tools.pipeline import run_pipeline
 log = logging.getLogger("oneflux_log")
 
 def do_run_oneflux(cfg):
-    log.info("If I was going to do it, I would do it here ...")
     args = {"timestamp": datetime.datetime.now().strftime("%Y%m%dT%H%M%S"),
             "versiond": str(VERSION_METADATA), "versionp": str(VERSION_PROCESSING)}
     args["command"] = cfg["Run"]["command"]
@@ -133,7 +132,7 @@ def do_run_oneflux(cfg):
         log.critical("***Problem during execution*** {e}".format(e=str(e)))
         tb = traceback.format_exc()
         log.critical("***Problem traceback*** {s}".format(s=str(tb)))
-        sys.exit(msg)
+        #sys.exit(msg)
 
     return
 
@@ -261,8 +260,30 @@ class edit_control_file(QtWidgets.QWidget):
                     self.context_menu.actionBrowseLogFile.triggered.connect(self.browse_log_file)
                 else:
                     pass
-            elif (str(parent.text()) == "Options") and (selected_item.column() == 0):
-                pass
+            elif (str(parent.text()) == "Run") and (selected_item.column() == 1):
+                key = str(parent.child(selected_item.row(),0).text())
+                if key == "command":
+                    existing_entry = str(parent.child(selected_item.row(),1).text())
+                    if existing_entry != "gap_fill":
+                        self.context_menu.actionSetCommandGapFill = QtWidgets.QAction(self)
+                        self.context_menu.actionSetCommandGapFill.setText("gap_fill")
+                        self.context_menu.addAction(self.context_menu.actionSetCommandGapFill)
+                        self.context_menu.actionSetCommandGapFill.triggered.connect(self.set_command_gap_fill)
+                    if existing_entry != "all":
+                        self.context_menu.actionSetCommandAll = QtWidgets.QAction(self)
+                        self.context_menu.actionSetCommandAll.setText("all")
+                        self.context_menu.addAction(self.context_menu.actionSetCommandAll)
+                        self.context_menu.actionSetCommandAll.triggered.connect(self.set_command_all)
+                    if existing_entry != "partition_nt":
+                        self.context_menu.actionSetCommandPartitionNT = QtWidgets.QAction(self)
+                        self.context_menu.actionSetCommandPartitionNT.setText("partition_nt")
+                        self.context_menu.addAction(self.context_menu.actionSetCommandPartitionNT)
+                        self.context_menu.actionSetCommandPartitionNT.triggered.connect(self.set_command_partition_nt)
+                    if existing_entry != "partition_dt":
+                        self.context_menu.actionSetCommandPartitionDT = QtWidgets.QAction(self)
+                        self.context_menu.actionSetCommandPartitionDT.setText("partition_dt")
+                        self.context_menu.addAction(self.context_menu.actionSetCommandPartitionDT)
+                        self.context_menu.actionSetCommandPartitionDT.triggered.connect(self.set_command_partition_dt)
             else:
                 pass
         else:
@@ -394,6 +415,34 @@ class edit_control_file(QtWidgets.QWidget):
             # remove the row
             parent.removeRow(selected_item.row())
         self.update_tab_text()
+
+    def set_command_all(self):
+        """ Set the run command to 'all'."""
+        idx = self.view.selectedIndexes()[0]
+        selected_item = idx.model().itemFromIndex(idx)
+        parent = selected_item.parent()
+        parent.child(selected_item.row(), 1).setText("all")
+
+    def set_command_gap_fill(self):
+        """ Set the run command to 'gap_fill'."""
+        idx = self.view.selectedIndexes()[0]
+        selected_item = idx.model().itemFromIndex(idx)
+        parent = selected_item.parent()
+        parent.child(selected_item.row(), 1).setText("gap_fill")
+
+    def set_command_partition_nt(self):
+        """ Set the run command to 'partition_nt'."""
+        idx = self.view.selectedIndexes()[0]
+        selected_item = idx.model().itemFromIndex(idx)
+        parent = selected_item.parent()
+        parent.child(selected_item.row(), 1).setText("partition_nt")
+
+    def set_command_partition_dt(self):
+        """ Set the run command to 'partition_dt'."""
+        idx = self.view.selectedIndexes()[0]
+        selected_item = idx.model().itemFromIndex(idx)
+        parent = selected_item.parent()
+        parent.child(selected_item.row(), 1).setText("partition_dt")
 
     def update_tab_text(self):
         """ Add an asterisk to the tab title text to indicate tab contents have changed."""

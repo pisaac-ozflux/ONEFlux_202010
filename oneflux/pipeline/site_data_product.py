@@ -1188,32 +1188,35 @@ def run_site(siteid, sitedir, first_t1, last_t1, version_processing=1, version_d
             raise ONEFluxError("Unknown Tier 1 state: first_t1={f}, last_t1={l}".format(f=first_t1, l=last_t1))
 
 
-        # NEW FOR JULY2016: save full ERA output
-        ts_precision = TIMESTAMP_PRECISION_BY_RESOLUTION[resolution]
-        ts_by_res = TIMESTAMP_DTYPE_BY_RESOLUTION[resolution][0][0]
-        first_era_ts, last_era_ts = ERA_FIRST_TIMESTAMP_START[:ts_precision], ERA_LAST_TIMESTAMP_START[:ts_precision]
-        if (full_meteo_data[ts_by_res][0] != first_era_ts):
-            msg = "{s}: mismatched first ERA timestamp expected ({e}) and found ({f})".format(s=siteid, e=first_era_ts, f=full_meteo_data[ts_by_res][0])
-            log.critical(msg)
-            raise ONEFluxError(msg)
-        if (full_meteo_data[ts_by_res][-1] != last_era_ts):
-            ww_last_era_ts = last_era_ts[:6] + '24' # last weekly timestamp can be on the 24th not 31st of December
-            hr_last_era_ts = last_era_ts[:-2] + '00' # last hourly timestamp is 2300 not 2330
-            if (resolution == 'ww') and (full_meteo_data[ts_by_res][-1] == ww_last_era_ts):
-                pass
-            elif (resolution == 'hh') and (full_meteo_data[ts_by_res][-1] == hr_last_era_ts):
-                pass
-            else:
-                msg = "{s} mismatched last ERA timestamp expected ({e}) and found ({f})".format(s=siteid, e=last_era_ts, f=full_meteo_data[ts_by_res][-1])
-                log.critical(msg)
-                raise ONEFluxError(msg)
-        filename = prodfile_template.format(sd=sitedir, s=siteid, g=ERA_STR, r=output_resolution, fy=1989, ly=2014, vd=version_data, vp=version_processing)
-        log.info("Saving ERA-Interim CSV file: {f}".format(f=filename))
-        full_meteo_header_labels = TIMESTAMP_VARIABLE_LIST + NEW_ERA_VARS
-        full_meteo_headers = [i for i in full_meteo_header_labels if i in full_meteo_data.dtype.names]
-        erai_filelist.append(filename)
-        save_csv_txt(filename=filename, data=full_meteo_data[full_meteo_headers])
-        # TODO: add era files to zips/filelists
+        # PRI 2022/01/17 - ERA_FIRST_TIMESTAMP_START and ERA_LAST_TIMESTAMP_START
+        # are hard coded in common.py
+        ## NEW FOR JULY2016: save full ERA output
+        #ts_precision = TIMESTAMP_PRECISION_BY_RESOLUTION[resolution]
+        #ts_by_res = TIMESTAMP_DTYPE_BY_RESOLUTION[resolution][0][0]
+        #first_era_ts, last_era_ts = ERA_FIRST_TIMESTAMP_START[:ts_precision], ERA_LAST_TIMESTAMP_START[:ts_precision]
+        #if (full_meteo_data[ts_by_res][0] != first_era_ts):
+            #msg = "{s}:
+            #expected ({e}) and found ({f})".format(s=siteid, e=first_era_ts, f=full_meteo_data[ts_by_res][0])
+            #log.critical(msg)
+            #raise ONEFluxError(msg)
+        #if (full_meteo_data[ts_by_res][-1] != last_era_ts):
+            #ww_last_era_ts = last_era_ts[:6] + '24' # last weekly timestamp can be on the 24th not 31st of December
+            #hr_last_era_ts = last_era_ts[:-2] + '00' # last hourly timestamp is 2300 not 2330
+            #if (resolution == 'ww') and (full_meteo_data[ts_by_res][-1] == ww_last_era_ts):
+                #pass
+            #elif (resolution == 'hh') and (full_meteo_data[ts_by_res][-1] == hr_last_era_ts):
+                #pass
+            #else:
+                #msg = "{s} mismatched last ERA timestamp expected ({e}) and found ({f})".format(s=siteid, e=last_era_ts, f=full_meteo_data[ts_by_res][-1])
+                #log.critical(msg)
+                #raise ONEFluxError(msg)
+        #filename = prodfile_template.format(sd=sitedir, s=siteid, g=ERA_STR, r=output_resolution, fy=1989, ly=2014, vd=version_data, vp=version_processing)
+        #log.info("Saving ERA-Interim CSV file: {f}".format(f=filename))
+        #full_meteo_header_labels = TIMESTAMP_VARIABLE_LIST + NEW_ERA_VARS
+        #full_meteo_headers = [i for i in full_meteo_header_labels if i in full_meteo_data.dtype.names]
+        #erai_filelist.append(filename)
+        #save_csv_txt(filename=filename, data=full_meteo_data[full_meteo_headers])
+        ## TODO: add era files to zips/filelists
 
 
         ### SUBSET files
